@@ -5,7 +5,6 @@ class SpecialMember
 {
 	std::vector<std::string> data_;
 	size_t	sizeV_{ 1'000'000 };
-	std::string word_{ "SpecialMember" };
 
 public:
 	SpecialMember();
@@ -26,7 +25,6 @@ SpecialMember::SpecialMember()
 {
 	std::cout << "Default constructor\n";
 	data_.resize(sizeV_);
-	std::fill(data_.begin(), data_.end(), word_);
 }
 
 SpecialMember::SpecialMember(const size_t sizeV) noexcept
@@ -34,7 +32,6 @@ SpecialMember::SpecialMember(const size_t sizeV) noexcept
 {
 	std::cout << "Parameterized constructor\n";
 	data_.resize(sizeV_);
-	std::fill(data_.begin(), data_.end(), word_);
 }
 
 SpecialMember::SpecialMember(const std::string word) noexcept
@@ -42,13 +39,13 @@ SpecialMember::SpecialMember(const std::string word) noexcept
 }
 
 SpecialMember::SpecialMember(const SpecialMember& other) noexcept
-	:data_(other.data_), sizeV_(other.sizeV_), word_(other.word_)
+	:data_(other.data_), sizeV_(other.sizeV_)
 {
 	std::cout << "Copy constructor\n";
 }
 
 SpecialMember::SpecialMember(SpecialMember&& other) noexcept
-	: data_(std::move(other.data_)), sizeV_(other.sizeV_), word_(std::move(other.word_))
+	: data_(std::move(other.data_)), sizeV_(other.sizeV_)
 {
 	std::cout << "Move constructor\n";
 	other.sizeV_ = 0;
@@ -71,7 +68,6 @@ SpecialMember& SpecialMember::operator=(const SpecialMember& other) noexcept
 	{  
 		data_ = other.data_;      
 		sizeV_ = other.sizeV_;
-		word_ = other.word_;      
 	}
 	return *this;
 }
@@ -79,14 +75,13 @@ SpecialMember& SpecialMember::operator=(const SpecialMember& other) noexcept
 SpecialMember& SpecialMember::operator=(SpecialMember&& other) noexcept
 {
 	std::cout << "Move assignment operator\n";
-	if (this != &other) {  
+	if (this != &other)
+	{  
 		data_.clear();
-		word_.clear();
 
 		data_ = std::move(other.data_);
 		sizeV_ = other.sizeV_;
 		other.sizeV_ = 0;
-		word_ = std::move(other.word_);
 	}
 	return *this;
 }
