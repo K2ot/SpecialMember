@@ -9,7 +9,6 @@ class SpecialMember
 public:
 	SpecialMember();
 	SpecialMember(const size_t sizeV) noexcept;
-	SpecialMember(const std::string word) noexcept;
 
 	SpecialMember(const SpecialMember& other) noexcept;
 	SpecialMember(SpecialMember&& other) noexcept;
@@ -32,10 +31,6 @@ SpecialMember::SpecialMember(const size_t sizeV) noexcept
 {
 	std::cout << "Parameterized constructor\n";
 	data_.resize(sizeV_);
-}
-
-SpecialMember::SpecialMember(const std::string word) noexcept
-{
 }
 
 SpecialMember::SpecialMember(const SpecialMember& other) noexcept
