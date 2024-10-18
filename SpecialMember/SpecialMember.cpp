@@ -86,33 +86,39 @@ SpecialMember& SpecialMember::operator=(SpecialMember&& other) noexcept
 	return *this;
 }
 
+static void separator() noexcept
+{
+	std::string sep(25, '-');
+	std::cout << sep << std::endl;
+}
+
 int main()
 {
 	std::cout << "Hello World!\n";
-	std::cout << "-------------------------------------------------\n";
+	separator();
 	SpecialMember member;
 	std::cout << "Member size no.1: " << member.getSizeVec() << std::endl;
-	std::cout << "-------------------------------------------------\n";
+	separator();
 	SpecialMember member2(100);
 	std::cout << "Member size no.2: " << member2.getSizeVec() << std::endl;
-	std::cout << "-------------------------------------------------\n";
+	separator();
 	SpecialMember member3(member);
 	std::cout << "Member size no.3: " << member3.getSizeVec() << std::endl;
-	std::cout << "-------------------------------------------------\n";
+	separator();
 	SpecialMember member4(std::move(member3));
 	std::cout << "Member size no.3: " << member3.getSizeVec() << std::endl;
 	std::cout << "Member size no.4: " << member4.getSizeVec() << std::endl;
-	std::cout << "-------------------------------------------------\n";
+	separator();
 	SpecialMember member5(5);
 	std::cout << "Member size no.5: " << member5.getSizeVec() << std::endl;
 	member5 = member4;
 	std::cout << "Member size no.4: " << member4.getSizeVec() << std::endl;
 	std::cout << "Member size no.5: " << member5.getSizeVec() << std::endl;
-	std::cout << "-------------------------------------------------\n";
+	separator();
 	SpecialMember member6(5);
 	std::cout << "Member size no.6: " << member6.getSizeVec() << std::endl;
 	member6 = std::move(member4);
 	std::cout << "Member size no.4: " << member4.getSizeVec() << std::endl;
 	std::cout << "Member size no.6: " << member6.getSizeVec() << std::endl;
-	std::cout << "-------------------------------------------------\n";
+	separator();
 }
