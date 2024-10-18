@@ -1,10 +1,11 @@
 ﻿#include <iostream>
 #include <vector>
+#include <chrono>
 
 class SpecialMember
 {
 	std::vector<std::string> data_;
-	size_t	sizeV_{ 1'000'000 };
+	size_t	sizeV_{ 999'999 };
 
 public:
 	SpecialMember();
@@ -91,29 +92,53 @@ int main()
 {
 	std::cout << "Hello World!\n";
 	separator();
+
+	auto time1 = std::chrono::high_resolution_clock::now();
 	SpecialMember member;
+	auto time2 = std::chrono::high_resolution_clock::now();
 	std::cout << "Member size no.1: " << member.getSizeVec() << std::endl;
+	std::cout << std::chrono::duration_cast<std::chrono::microseconds>(time2 - time1).count()<< " microseconds\n";
 	separator();
+
+	time1 = std::chrono::high_resolution_clock::now();
 	SpecialMember member2(100);
+	time2 = std::chrono::high_resolution_clock::now();
 	std::cout << "Member size no.2: " << member2.getSizeVec() << std::endl;
+	std::cout << std::chrono::duration_cast<std::chrono::microseconds>(time2 - time1).count() << " microseconds\n";
 	separator();
+
+	time1 = std::chrono::high_resolution_clock::now();
 	SpecialMember member3(member);
 	std::cout << "Member size no.3: " << member3.getSizeVec() << std::endl;
+	time2 = std::chrono::high_resolution_clock::now();
+	std::cout  << std::chrono::duration_cast<std::chrono::microseconds>(time2 - time1).count() << " microseconds\n";
 	separator();
+
+	time1 = std::chrono::high_resolution_clock::now();
 	SpecialMember member4(std::move(member3));
+	time2 = std::chrono::high_resolution_clock::now();
 	std::cout << "Member size no.3: " << member3.getSizeVec() << std::endl;
 	std::cout << "Member size no.4: " << member4.getSizeVec() << std::endl;
+	std::cout << std::chrono::duration_cast<std::chrono::microseconds>(time2 - time1).count() << " microseconds\n";
 	separator();
+
 	SpecialMember member5(5);
 	std::cout << "Member size no.5: " << member5.getSizeVec() << std::endl;
+	time1 = std::chrono::high_resolution_clock::now();
 	member5 = member4;
+	time2 = std::chrono::high_resolution_clock::now();
 	std::cout << "Member size no.4: " << member4.getSizeVec() << std::endl;
 	std::cout << "Member size no.5: " << member5.getSizeVec() << std::endl;
+	std::cout << std::chrono::duration_cast<std::chrono::microseconds>(time2 - time1).count() << " microseconds\n";
 	separator();
+
 	SpecialMember member6(5);
 	std::cout << "Member size no.6: " << member6.getSizeVec() << std::endl;
+	time1 = std::chrono::high_resolution_clock::now();
 	member6 = std::move(member4);
+	time2 = std::chrono::high_resolution_clock::now();
 	std::cout << "Member size no.4: " << member4.getSizeVec() << std::endl;
 	std::cout << "Member size no.6: " << member6.getSizeVec() << std::endl;
+	std::cout << std::chrono::duration_cast<std::chrono::microseconds>(time2 - time1).count() << " microseconds\n";
 	separator();
 }
